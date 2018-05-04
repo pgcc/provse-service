@@ -5,6 +5,8 @@
  */
 package br.ufjf.pgcc.eseco.provse.service.app;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.query.Query;
@@ -13,8 +15,12 @@ import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.QueryFactory;
 import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.util.iterator.ExtendedIterator;
+import com.hp.hpl.jena.util.iterator.Filter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -82,18 +88,34 @@ public class InferenceLayer {
             while (results.hasNext()) {
                 QuerySolution qs = results.next();
                 Resource predicate = qs.getResource("?predicate");
-                Resource resource = qs.getResource("?object");
-
                 String p = predicate.toString();
-                if (p.contains("#")) {
-                    p = p.split("#")[1];
-                }
-                String r = resource.toString();
-                if (r.contains("#")) {
-                    r = r.split("#")[1];
+
+                String r = "";
+                try {
+                    Resource resource = qs.getResource("?object");
+                    r = resource.toString();
+                } catch (ClassCastException e) {
+                    Literal literal = qs.getLiteral("?object");
+                    r = literal.toString();
                 }
 
-                if (resource.toString() != null && !resource.toString().equals("null") && predicate.toString() != null && !predicate.toString().equals("null")) {
+                if (p.contains("#")) {
+                    try {
+                        p = p.split("#")[1];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        p = "";
+                    }
+                }
+
+                if (r.contains("#")) {
+                    try {
+                        r = r.split("#")[1];
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        r = "";
+                    }
+                }
+
+                if (!r.equals("") && predicate.toString() != null && !predicate.toString().equals("null")) {
                     list.add(p + " => " + r);
                 }
             }
@@ -156,6 +178,73 @@ public class InferenceLayer {
             }
         }
         return listProperties;
+    }
+
+    public JsonObject jenaGetInferredDataByIndividual(String individualName) {
+        JsonObject jsonProperties = new JsonObject();
+        JsonObject jsonInferred = new JsonObject();
+        jsonProperties.add("inferred", jsonInferred);
+        JsonObject jsonAsserted = new JsonObject();
+        jsonProperties.add("asserted", jsonAsserted);
+        JsonObject jsonDataProperties = new JsonObject();
+        jsonProperties.add("dataProperties", jsonDataProperties);
+        Resource resource = controller.getInfModel().getResource(OntologyController.URI + individualName);
+        if (resource != null) {
+            ExtendedIterator<Statement> stmts = resource.listProperties().filterDrop(new Filter<Statement>() {
+                @Override
+                public boolean accept(Statement t) {
+                    return t.getPredicate().getLocalName().equals("differentFrom") || controller.getOntModel().contains(t);
+                }
+            });
+
+            for (Statement s : resource.listProperties().toList()) {
+                try {
+                    String predicate = s.getPredicate().getLocalName();
+                    if (predicate.equals("differentFrom") || predicate.equals("type") || predicate.equals("sameAs")) {
+                        continue;
+                    }
+
+                    String name = "";
+                    if (!s.getObject().isResource()) {
+                        name = s.getObject().asLiteral().getValue().toString();
+                        jsonDataProperties.addProperty(predicate, name);
+                        continue;
+                    }
+                    name = s.getResource().getLocalName();
+                    if (controller.getOntModel().contains(s)) {
+                        JsonArray jsonArray = new JsonArray();
+                        if (jsonAsserted.get(predicate) != null) {
+                            jsonArray = jsonAsserted.get(predicate).getAsJsonArray();
+                        }
+                        jsonArray.add(name);
+                        jsonAsserted.add(predicate, jsonArray);
+                    } else {
+                        JsonArray jsonArray = new JsonArray();
+                        if (jsonInferred.get(predicate) != null) {
+                            jsonArray = jsonInferred.get(predicate).getAsJsonArray();
+
+                        }
+                        jsonArray.add(name);
+                        jsonInferred.add(predicate, jsonArray);
+                    }
+                } catch (Exception e) {
+                    System.out.println(s.toString());
+                    e.printStackTrace();
+                    continue;
+                }
+            }
+        }
+        return jsonProperties;
+    }
+
+    public ExtendedIterator<Statement> jenaGetInferredData() {
+        ExtendedIterator<Statement> stmts = controller.getInfModel().listStatements().filterDrop(new Filter<Statement>() {
+            @Override
+            public boolean accept(Statement o) {
+                return controller.getOntModel().contains(o);
+            }
+        });
+        return stmts;
     }
 
     public List<String> jenaGetUsedWfmsInf(String individualName) {

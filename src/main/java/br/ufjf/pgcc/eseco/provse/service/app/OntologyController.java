@@ -35,7 +35,7 @@ public class OntologyController {
     public static final String PROVONE_URI = "http://purl.dataone.org/provone/2015/01/15/ontology#";
 
     //caminho para a ontologia
-    public static final String ONTOLOGY = "ontologies/prov-se-o3.owl";
+    public static final String ONTOLOGY = "ontologies/prov-se-o-clean.owl";
 
     //caminho para a ontologia carregada
     public static final String ONTOLOGY_LOAD = System.getProperty("user.home") + "\\AppData\\Local\\Temp\\prov-se-o-load.owl";

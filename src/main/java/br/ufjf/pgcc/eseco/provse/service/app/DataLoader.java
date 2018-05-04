@@ -122,6 +122,12 @@ public class DataLoader {
                 ontClasses.put(next.getLocalName().toLowerCase(), next);
             } 
         }
+        
+        model = ModelFactory.createDefaultModel();
+        model.read(loader.getResource(OntologyController.ONTOLOGY).getPath());
+        
+        ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM, model);
+        ontModel.prepare();
     }
 
     private static void saveNewOntology() {
@@ -142,8 +148,9 @@ public class DataLoader {
         //determinando que o fluxo de saida vai para o arquivo e não para a tela            
         out = new BufferedWriter(fstream);
         //ontologia carregada
-        ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM, ontModel);
+       // ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM, ontModel);
         //utilizar RDF/XML-ABBREV, so RDF/XML da erro no protege!        
+        
         ontModel.write(out);
 
     }
