@@ -7,12 +7,10 @@ package br.ufjf.pgcc.eseco.provse.service;
 
 import br.ufjf.pgcc.eseco.provse.service.app.DataLoader;
 import br.ufjf.pgcc.eseco.provse.service.app.InferenceLayer;
-import br.ufjf.pgcc.eseco.provse.service.app.OntologyController;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
