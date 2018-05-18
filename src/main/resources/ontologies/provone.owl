@@ -10,7 +10,6 @@
      xmlns:prov="http://www.w3.org/ns/prov#">
     <owl:Ontology rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#">
         <owl:versionIRI rdf:resource="http://purl.dataone.org/provone/2015/01/15/ontology#"/>
-        <owl:imports rdf:resource="http://www.w3.org/ns/prov-o-20130430"/>
         <rdfs:comment>This document describes an extension of the W3C PROV standard for scientific workflow provenance.  It represents a potential standard published publicly for evaluation and possible adoption.  However, it is not associated with and is not supported by any standards organization.</rdfs:comment>
         <prov:specializationOf>http://www.w3.org/ns/prov-o</prov:specializationOf>
         <rdfs:seeAlso>http://www.w3.org/ns/prov</rdfs:seeAlso>
@@ -187,10 +186,7 @@
 
     <!-- http://www.w3.org/ns/prov#qualifiedGeneration -->
 
-    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#qualifiedGeneration">
-        <rdfs:domain rdf:resource="http://purl.dataone.org/provone/2015/01/15/ontology#Execution"/>
-        <rdfs:range rdf:resource="http://www.w3.org/ns/prov#Generation"/>
-    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#qualifiedGeneration"/>
     
 
 

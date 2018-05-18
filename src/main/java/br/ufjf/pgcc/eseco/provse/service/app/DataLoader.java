@@ -120,12 +120,12 @@ public class DataLoader {
             OntClass next = (OntClass) iterator.next();
             if (next.getLocalName() != null) {
                 ontClasses.put(next.getLocalName().toLowerCase(), next);
-            } 
+            }
         }
-        
+
         model = ModelFactory.createDefaultModel();
         model.read(loader.getResource(OntologyController.ONTOLOGY).getPath());
-        
+
         ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM, model);
         ontModel.prepare();
     }
@@ -148,9 +148,9 @@ public class DataLoader {
         //determinando que o fluxo de saida vai para o arquivo e não para a tela            
         out = new BufferedWriter(fstream);
         //ontologia carregada
-       // ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM, ontModel);
+        // ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM, ontModel);
         //utilizar RDF/XML-ABBREV, so RDF/XML da erro no protege!        
-        
+
         ontModel.write(out);
 
     }
@@ -311,7 +311,7 @@ public class DataLoader {
             Iterator<Map.Entry<String, JsonElement>> it = entrySet.iterator();
             Map.Entry<String, JsonElement> individual1 = it.next();
             Map.Entry<String, JsonElement> individual2 = it.next();
-
+            
             ObjectProperty property = objectProperties.get(propertyName.toLowerCase());
             if (property == null) {
                 if (propertyName.toLowerCase().endsWith("relation")) {
@@ -321,13 +321,13 @@ public class DataLoader {
 
             Individual i1 = ontModel.getIndividual(OntologyController.URI + individual1.getKey().toLowerCase() + "." + individual1.getValue().getAsString());
             Individual i2 = ontModel.getIndividual(OntologyController.URI + individual2.getKey().toLowerCase() + "." + individual2.getValue().getAsString());
-            if (i1 == null) {                
+            if (i1 == null) {
                 i1 = ontModel.createIndividual(OntologyController.URI + individual1.getKey().toLowerCase() + "." + individual1.getValue().getAsString().toLowerCase(), ontClasses.get(individual1.getKey().toLowerCase()));
             }
             if (i2 == null) {
                 i2 = ontModel.createIndividual(OntologyController.URI + individual2.getKey().toLowerCase() + "." + individual2.getValue().getAsString().toLowerCase(), ontClasses.get(individual2.getKey().toLowerCase()));
             }
-            if (i1 == null || i2 == null || property == null) {                
+            if (i1 == null || i2 == null || property == null) {
                 continue;
             }
 

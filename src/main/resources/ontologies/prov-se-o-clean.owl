@@ -19,77 +19,6 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
-    // Annotation properties
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    
-
-
-    <!-- http://purl.dataone.org/provone/2015/01/15/ontology#hasDefaultParam -->
-
-    <owl:AnnotationProperty rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hasDefaultParam"/>
-    
-
-
-    <!-- http://purl.dataone.org/provone/2015/01/15/ontology#wasPartOf -->
-
-    <owl:AnnotationProperty rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#wasPartOf">
-        <rdfs:range rdf:resource="http://www.w3.org/ns/prov#Activity"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled -->
-
-    <owl:AnnotationProperty rdf:about="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
-    
-
-
-    <!-- http://www.w3.org/ns/prov#qualifiedAssociation -->
-
-    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/prov#qualifiedAssociation"/>
-    
-
-
-    <!-- http://www.w3.org/ns/prov#qualifiedGeneration -->
-
-    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/prov#qualifiedGeneration"/>
-    
-
-
-    <!-- http://www.w3.org/ns/prov#qualifiedUsage -->
-
-    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/prov#qualifiedUsage"/>
-    
-
-
-    <!-- http://www.w3.org/ns/prov#used -->
-
-    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/prov#used"/>
-    
-
-
-    <!-- http://www.w3.org/ns/prov#wasAssociatedWith -->
-
-    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/prov#wasAssociatedWith">
-        <rdfs:range rdf:resource="http://www.w3.org/ns/prov#Agent"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- http://www.w3.org/ns/prov#wasInformedBy -->
-
-    <owl:AnnotationProperty rdf:about="http://www.w3.org/ns/prov#wasInformedBy">
-        <rdfs:range rdf:resource="http://www.w3.org/ns/prov#Activity"/>
-    </owl:AnnotationProperty>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
     // Object Properties
     //
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -127,6 +56,14 @@
     
 
 
+    <!-- http://purl.dataone.org/provone/2015/01/15/ontology#hadEntity -->
+
+    <owl:ObjectProperty rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hadEntity">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://purl.dataone.org/provone/2015/01/15/ontology#hadInPort -->
 
     <owl:ObjectProperty rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hadInPort"/>
@@ -136,6 +73,12 @@
     <!-- http://purl.dataone.org/provone/2015/01/15/ontology#hadOutPort -->
 
     <owl:ObjectProperty rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hadOutPort"/>
+    
+
+
+    <!-- http://purl.dataone.org/provone/2015/01/15/ontology#hasDefaultParam -->
+
+    <owl:ObjectProperty rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hasDefaultParam"/>
     
 
 
@@ -190,9 +133,33 @@
     
 
 
+    <!-- http://www.w3.org/ns/prov#generated -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#generated">
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#qualifiedGeneration"/>
+            <rdf:Description rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hadEntity"/>
+        </owl:propertyChainAxiom>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#qualifiedGeneration"/>
+            <rdf:Description rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hadOutPort"/>
+            <rdf:Description rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hasDefaultParam"/>
+        </owl:propertyChainAxiom>
+    </owl:ObjectProperty>
+    
+
+
     <!-- http://www.w3.org/ns/prov#hadDerivation -->
 
     <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#hadDerivation">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://www.w3.org/ns/prov#hadMember -->
+
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#hadMember">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#TransitiveProperty"/>
     </owl:ObjectProperty>
     
@@ -220,13 +187,25 @@
 
     <!-- http://www.w3.org/ns/prov#qualifiedUsage -->
 
-    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#qualifiedUsage"/>
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#qualifiedUsage">
+        <rdfs:domain rdf:resource="http://www.w3.org/ns/prov#Activity"/>
+    </owl:ObjectProperty>
     
 
 
     <!-- http://www.w3.org/ns/prov#used -->
 
-    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#used"/>
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#used">
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#qualifiedUsage"/>
+            <rdf:Description rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hadEntity"/>
+        </owl:propertyChainAxiom>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#qualifiedUsage"/>
+            <rdf:Description rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hadInPort"/>
+            <rdf:Description rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hasDefaultParam"/>
+        </owl:propertyChainAxiom>
+    </owl:ObjectProperty>
     
 
 
@@ -701,222 +680,6 @@
     <!-- http://www.w3.org/ns/prov#Usage -->
 
     <owl:Class rdf:about="http://www.w3.org/ns/prov#Usage"/>
-    
-
-
-    <!-- 
-    ///////////////////////////////////////////////////////////////////////////////////////
-    //
-    // Rules
-    //
-    ///////////////////////////////////////////////////////////////////////////////////////
-     -->
-
-    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#p">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#w">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#z">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
-    </rdf:Description>
-    <rdf:Description>
-        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">S3</rdfs:label>
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
-        <swrl:body>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://purl.dataone.org/provone/2015/01/15/ontology#hasSubProgram"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#p"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                        <rdf:first>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://purl.dataone.org/provone/2015/01/15/ontology#hasSubProgram"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#p"/>
-                            </rdf:Description>
-                        </rdf:first>
-                        <rdf:rest>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                <rdf:first>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
-                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                                    </rdf:Description>
-                                </rdf:first>
-                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                            </rdf:Description>
-                        </rdf:rest>
-                    </rdf:Description>
-                </rdf:rest>
-            </rdf:Description>
-        </swrl:body>
-        <swrl:head>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#isSimilar"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-            </rdf:Description>
-        </swrl:head>
-    </rdf:Description>
-    <rdf:Description>
-        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">S2</rdfs:label>
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
-        <swrl:body>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.w3.org/ns/prov#wasMemberOf"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#w"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                        <rdf:first>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://www.w3.org/ns/prov#wasMemberOf"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#z"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                            </rdf:Description>
-                        </rdf:first>
-                        <rdf:rest>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                <rdf:first>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                        <swrl:propertyPredicate rdf:resource="http://www.w3.org/ns/prov#wasDerivedFrom"/>
-                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#z"/>
-                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#w"/>
-                                    </rdf:Description>
-                                </rdf:first>
-                                <rdf:rest>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                        <rdf:first>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
-                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                                            </rdf:Description>
-                                        </rdf:first>
-                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                    </rdf:Description>
-                                </rdf:rest>
-                            </rdf:Description>
-                        </rdf:rest>
-                    </rdf:Description>
-                </rdf:rest>
-            </rdf:Description>
-        </swrl:body>
-        <swrl:head>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#isSimilar"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-            </rdf:Description>
-        </swrl:head>
-    </rdf:Description>
-    <rdf:Description>
-        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
-        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
-        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">S1</rdfs:label>
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
-        <swrl:body>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.w3.org/ns/prov#wasMemberOf"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#w"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                        <rdf:first>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://www.w3.org/ns/prov#wasMemberOf"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#w"/>
-                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                            </rdf:Description>
-                        </rdf:first>
-                        <rdf:rest>
-                            <rdf:Description>
-                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                <rdf:first>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
-                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                                    </rdf:Description>
-                                </rdf:first>
-                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                            </rdf:Description>
-                        </rdf:rest>
-                    </rdf:Description>
-                </rdf:rest>
-            </rdf:Description>
-        </swrl:body>
-        <swrl:head>
-            <rdf:Description>
-                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                <rdf:first>
-                    <rdf:Description>
-                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#isSimilar"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                    </rdf:Description>
-                </rdf:first>
-                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-            </rdf:Description>
-        </swrl:head>
-    </rdf:Description>
 </rdf:RDF>
 
 
