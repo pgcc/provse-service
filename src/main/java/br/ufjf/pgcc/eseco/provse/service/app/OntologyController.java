@@ -11,6 +11,7 @@ import com.hp.hpl.jena.rdf.model.InfModel;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.reasoner.Reasoner;
+import java.io.File;
 import java.nio.file.Paths;
 import org.mindswap.pellet.jena.PelletReasonerFactory;
 
@@ -38,7 +39,7 @@ public class OntologyController {
     public static final String ONTOLOGY = "ontologies/prov-se-o-clean.owl";
 
     //caminho para a ontologia carregada
-    public static final String ONTOLOGY_LOAD = System.getProperty("user.home") + "\\AppData\\Local\\Temp\\prov-se-o-load.owl";
+    public static final String ONTOLOGY_LOAD = System.getProperty("java.io.tmpdir") + File.separator + "prov-se-o-load.owl";
 
     //caminho para as ontologias importadas
     public static final String PROV_ONTOLOGY = "ontologies/prov-o.owl";
@@ -78,7 +79,6 @@ public class OntologyController {
         return ontModel;
     }
 
-    
 //    public static void main(String[] args) {
 //        //colocar public static final String ONTOLOGY = "/files/ontologies/prov-se-o.owl";
 //        // e Paths.get(OntologyController.ONTOLOGY).toUri().toString() no read

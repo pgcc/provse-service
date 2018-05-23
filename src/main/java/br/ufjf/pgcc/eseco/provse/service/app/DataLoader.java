@@ -24,6 +24,7 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.rdf.model.ResourceFactory;
 import com.hp.hpl.jena.util.iterator.ExtendedIterator;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -140,18 +141,28 @@ public class DataLoader {
 
         try {
             //caminho para o novo arquivo de ontologia
-            fstream = new OutputStreamWriter(new FileOutputStream(OntologyController.ONTOLOGY_LOAD), StandardCharsets.UTF_8);
+            File f = new File(OntologyController.ONTOLOGY_LOAD);
+            System.out.println("Exist = " + f.exists() + " diretory = " + !f.isDirectory());
+            if (f.exists() && !f.isDirectory()) {
+                f.delete();
+            }
             //se não existir arquivo, o mesmo será criado, se não, será reescrito
+            fstream = new OutputStreamWriter(new FileOutputStream(OntologyController.ONTOLOGY_LOAD), StandardCharsets.UTF_8);
+
+            //determinando que o fluxo de saida vai para o arquivo e não para a tela            
+            out = new BufferedWriter(fstream);
+
+            //ontologia carregada
+            // ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM, ontModel);
+            //utilizar RDF/XML-ABBREV, so RDF/XML da erro no protege!        
+            ontModel.write(out);
+            fstream.flush();
+            out.flush();
+            fstream.close();
+            out.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        //determinando que o fluxo de saida vai para o arquivo e não para a tela            
-        out = new BufferedWriter(fstream);
-        //ontologia carregada
-        // ontModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM, ontModel);
-        //utilizar RDF/XML-ABBREV, so RDF/XML da erro no protege!        
-
-        ontModel.write(out);
 
     }
 
@@ -311,7 +322,7 @@ public class DataLoader {
             Iterator<Map.Entry<String, JsonElement>> it = entrySet.iterator();
             Map.Entry<String, JsonElement> individual1 = it.next();
             Map.Entry<String, JsonElement> individual2 = it.next();
-            
+
             ObjectProperty property = objectProperties.get(propertyName.toLowerCase());
             if (property == null) {
                 if (propertyName.toLowerCase().endsWith("relation")) {

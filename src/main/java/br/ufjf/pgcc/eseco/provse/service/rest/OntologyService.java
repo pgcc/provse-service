@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.ufjf.pgcc.eseco.provse.service;
+package br.ufjf.pgcc.eseco.provse.service.rest;
 
 import br.ufjf.pgcc.eseco.provse.service.app.DataLoader;
 import br.ufjf.pgcc.eseco.provse.service.app.InferenceLayer;
@@ -13,7 +13,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
@@ -28,17 +27,7 @@ import javax.ws.rs.core.MediaType;
  * @author Lenita
  */
 @Path("ontology")
-public class OntologyResource {
-
-    @Context
-    private UriInfo context;
-
-    /**
-     * Creates a new instance of OntologyResource
-     */
-    public OntologyResource() {
-
-    }
+public class OntologyService {
 
     /**
      * Retrieves representation of an instance of
@@ -49,8 +38,8 @@ public class OntologyResource {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Path("/")
     public String getXml(@QueryParam("entity") String entity) {
-        System.out.println("+++++++++++++++ Getting ");
         JsonObject jObject = new JsonObject();
         jObject.addProperty("teste", Boolean.TRUE);
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -67,8 +56,8 @@ public class OntologyResource {
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+    @Path("/")
     public void putXml(String content, @Context final HttpServletResponse response) {
-        System.out.println("+++++++++++++++ Putting: ");
         Gson gson = new GsonBuilder().create();
         JsonElement jsonElement = gson.fromJson(content, JsonElement.class);
         try {

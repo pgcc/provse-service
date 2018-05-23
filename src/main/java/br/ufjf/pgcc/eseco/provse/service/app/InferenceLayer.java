@@ -7,6 +7,7 @@ package br.ufjf.pgcc.eseco.provse.service.app;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.query.Query;
@@ -182,6 +183,11 @@ public class InferenceLayer {
 
     public JsonObject jenaGetInferredDataByIndividual(String individualName) {
         JsonObject jsonProperties = new JsonObject();
+        Individual individual = controller.getOntModel().getIndividual(OntologyController.URI + individualName);
+        if (individual == null) {
+            return jsonProperties;
+        }
+
         JsonObject jsonInferred = new JsonObject();
         jsonProperties.add("inferred", jsonInferred);
         JsonObject jsonAsserted = new JsonObject();
@@ -190,7 +196,7 @@ public class InferenceLayer {
         jsonProperties.add("dataProperties", jsonDataProperties);
         Resource resource = controller.getInfModel().getResource(OntologyController.URI + individualName);
         if (resource != null) {
-            ExtendedIterator<Statement> stmts = resource.listProperties().filterDrop(new Filter<Statement>() {
+            resource.listProperties().filterDrop(new Filter<Statement>() {
                 @Override
                 public boolean accept(Statement t) {
                     return t.getPredicate().getLocalName().equals("differentFrom") || controller.getOntModel().contains(t);
@@ -228,9 +234,7 @@ public class InferenceLayer {
                         jsonInferred.add(predicate, jsonArray);
                     }
                 } catch (Exception e) {
-                    System.out.println(s.toString());
                     e.printStackTrace();
-                    continue;
                 }
             }
         }
