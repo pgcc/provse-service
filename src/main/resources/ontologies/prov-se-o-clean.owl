@@ -114,6 +114,7 @@
     <!-- http://purl.dataone.org/provone/2015/01/15/ontology#wasPartOf -->
 
     <owl:ObjectProperty rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#wasPartOf">
+        <owl:inverseOf rdf:resource="http://www.w3.org/ns/prov#wasInformedBy"/>
         <rdfs:domain rdf:resource="http://www.w3.org/ns/prov#Activity"/>
     </owl:ObjectProperty>
     
@@ -205,6 +206,10 @@
             <rdf:Description rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hadInPort"/>
             <rdf:Description rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#hasDefaultParam"/>
         </owl:propertyChainAxiom>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#wasInformedBy"/>
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#used"/>
+        </owl:propertyChainAxiom>
     </owl:ObjectProperty>
     
 
@@ -215,6 +220,10 @@
         <owl:propertyChainAxiom rdf:parseType="Collection">
             <rdf:Description rdf:about="http://www.w3.org/ns/prov#wasGeneratedBy"/>
             <rdf:Description rdf:about="http://www.w3.org/ns/prov#wasInformedBy"/>
+        </owl:propertyChainAxiom>
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#wasInformedBy"/>
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#wasAssociatedWith"/>
         </owl:propertyChainAxiom>
     </owl:ObjectProperty>
     
@@ -267,7 +276,12 @@
 
     <!-- http://www.w3.org/ns/prov#wasGeneratedBy -->
 
-    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#wasGeneratedBy"/>
+    <owl:ObjectProperty rdf:about="http://www.w3.org/ns/prov#wasGeneratedBy">
+        <owl:propertyChainAxiom rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.w3.org/ns/prov#wasGeneratedBy"/>
+            <rdf:Description rdf:about="http://purl.dataone.org/provone/2015/01/15/ontology#wasPartOf"/>
+        </owl:propertyChainAxiom>
+    </owl:ObjectProperty>
     
 
 

@@ -141,6 +141,7 @@ public class DataLoader {
 
         try {
             //caminho para o novo arquivo de ontologia
+            System.out.println(OntologyController.ONTOLOGY_LOAD);
             File f = new File(OntologyController.ONTOLOGY_LOAD);
             System.out.println("Exist = " + f.exists() + " diretory = " + !f.isDirectory());
             if (f.exists() && !f.isDirectory()) {
