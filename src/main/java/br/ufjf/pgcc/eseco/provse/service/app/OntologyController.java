@@ -54,6 +54,10 @@ public class OntologyController {
         return instance;
     }
 
+    public static void refresh() {
+        instance = new OntologyController();
+    }
+
     private OntologyController() {
 
         Model model = ModelFactory.createDefaultModel();

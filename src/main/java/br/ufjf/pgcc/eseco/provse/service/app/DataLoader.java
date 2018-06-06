@@ -161,6 +161,7 @@ public class DataLoader {
             out.flush();
             fstream.close();
             out.close();
+            OntologyController.refresh();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

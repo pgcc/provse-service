@@ -182,6 +182,7 @@ public class InferenceLayer {
     }
 
     public JsonObject jenaGetInferredDataByIndividual(String individualName) {
+        individualName = individualName.replace("activity.", "program.");
         JsonObject jsonProperties = new JsonObject();
         Individual individual = controller.getOntModel().getIndividual(OntologyController.URI + individualName);
         if (individual == null) {
@@ -217,6 +218,7 @@ public class InferenceLayer {
                         continue;
                     }
                     name = s.getResource().getLocalName();
+                    name = name.replace("program.", "activity.");
                     if (controller.getOntModel().contains(s)) {
                         JsonArray jsonArray = new JsonArray();
                         if (jsonAsserted.get(predicate) != null) {
