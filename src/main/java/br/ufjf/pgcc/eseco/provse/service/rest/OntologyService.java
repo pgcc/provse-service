@@ -40,9 +40,6 @@ public class OntologyService {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/")
     public String getXml(@QueryParam("entity") String entity) {
-        JsonObject jObject = new JsonObject();
-        jObject.addProperty("teste", Boolean.TRUE);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         InferenceLayer inferenceLayer = new InferenceLayer();
         JsonObject sparqlGetPropertiesByIndividualInf = inferenceLayer.jenaGetInferredDataByIndividual(entity);
         return sparqlGetPropertiesByIndividualInf.toString();
