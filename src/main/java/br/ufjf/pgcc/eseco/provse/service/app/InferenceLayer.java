@@ -7,7 +7,9 @@ package br.ufjf.pgcc.eseco.provse.service.app;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.hp.hpl.jena.ontology.DatatypeProperty;
 import com.hp.hpl.jena.ontology.Individual;
+import com.hp.hpl.jena.ontology.ObjectProperty;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.query.Query;
@@ -182,6 +184,7 @@ public class InferenceLayer {
     }
 
     public JsonObject jenaGetInferredDataByIndividual(String individualName) {
+        DatatypeProperty dpName = controller.getOntModel().getDatatypeProperty(OntologyController.URI + "name");
         individualName = individualName.replace("activity.", "program.");
         JsonObject jsonProperties = new JsonObject();
         Individual individual = controller.getOntModel().getIndividual(OntologyController.URI + individualName);
@@ -197,6 +200,7 @@ public class InferenceLayer {
         jsonProperties.add("dataProperties", jsonDataProperties);
         Resource resource = controller.getInfModel().getResource(OntologyController.URI + individualName);
         if (resource != null) {
+            jsonProperties.addProperty("resource", resource.getProperty(dpName) != null ? resource.getProperty(dpName).getString() : resource.getLocalName());
             resource.listProperties().filterDrop(new Filter<Statement>() {
                 @Override
                 public boolean accept(Statement t) {
@@ -219,12 +223,24 @@ public class InferenceLayer {
                     }
                     name = s.getResource().getLocalName();
                     name = name.replace("program.", "activity.");
+                    String type = name.split("\\.")[0];
+                    String id = name.split("\\.")[1];
+                    if (s.getResource().getProperty(dpName) != null) {
+                        name = s.getResource().getProperty(dpName).getString();
+                    }
+                    
+                    JsonObject obj = new JsonObject();
+                    obj.addProperty("id", id);
+                    obj.addProperty("type", type);
+                    obj.addProperty("name", name);
+                    
                     if (controller.getOntModel().contains(s)) {
                         JsonArray jsonArray = new JsonArray();
                         if (jsonAsserted.get(predicate) != null) {
                             jsonArray = jsonAsserted.get(predicate).getAsJsonArray();
                         }
-                        jsonArray.add(name);
+
+                        jsonArray.add(obj);
                         jsonAsserted.add(predicate, jsonArray);
                     } else {
                         JsonArray jsonArray = new JsonArray();
@@ -232,7 +248,7 @@ public class InferenceLayer {
                             jsonArray = jsonInferred.get(predicate).getAsJsonArray();
 
                         }
-                        jsonArray.add(name);
+                        jsonArray.add(obj);
                         jsonInferred.add(predicate, jsonArray);
                     }
                 } catch (Exception e) {
