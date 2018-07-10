@@ -9,7 +9,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hp.hpl.jena.ontology.DatatypeProperty;
 import com.hp.hpl.jena.ontology.Individual;
-import com.hp.hpl.jena.ontology.ObjectProperty;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.query.Query;
@@ -198,9 +197,16 @@ public class InferenceLayer {
         jsonProperties.add("asserted", jsonAsserted);
         JsonObject jsonDataProperties = new JsonObject();
         jsonProperties.add("dataProperties", jsonDataProperties);
+
         Resource resource = controller.getInfModel().getResource(OntologyController.URI + individualName);
         if (resource != null) {
             jsonProperties.addProperty("resource", resource.getProperty(dpName) != null ? resource.getProperty(dpName).getString() : resource.getLocalName());
+
+            String name = resource.getLocalName();
+            name = name.replace("program.", "activity.");
+            String type = name.split("\\.")[0];
+            jsonDataProperties.addProperty("type", type);
+
             resource.listProperties().filterDrop(new Filter<Statement>() {
                 @Override
                 public boolean accept(Statement t) {
@@ -215,7 +221,7 @@ public class InferenceLayer {
                         continue;
                     }
 
-                    String name = "";
+                    name = "";
                     if (!s.getObject().isResource()) {
                         name = s.getObject().asLiteral().getValue().toString();
                         jsonDataProperties.addProperty(predicate, name);
@@ -223,17 +229,17 @@ public class InferenceLayer {
                     }
                     name = s.getResource().getLocalName();
                     name = name.replace("program.", "activity.");
-                    String type = name.split("\\.")[0];
+                    type = name.split("\\.")[0];
                     String id = name.split("\\.")[1];
                     if (s.getResource().getProperty(dpName) != null) {
                         name = s.getResource().getProperty(dpName).getString();
                     }
-                    
+
                     JsonObject obj = new JsonObject();
                     obj.addProperty("id", id);
                     obj.addProperty("type", type);
                     obj.addProperty("name", name);
-                    
+
                     if (controller.getOntModel().contains(s)) {
                         JsonArray jsonArray = new JsonArray();
                         if (jsonAsserted.get(predicate) != null) {

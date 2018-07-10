@@ -190,7 +190,7 @@ public class DataLoader {
         JsonArray developerAsJsonObject = agentAsJsonObject.getAsJsonArray("developer");
         loadInstancesAndDataProperties(developerAsJsonObject, "Developer", "Developer");
 
-        JsonArray serviceAsJsonObject = agentAsJsonObject.getAsJsonArray("service");
+        JsonArray serviceAsJsonObject = agentAsJsonObject.getAsJsonArray("");
         loadInstancesAndDataProperties(serviceAsJsonObject, "Service", "Service");
 
         JsonArray wfmsAsJsonObject = agentAsJsonObject.getAsJsonArray("wfms");
