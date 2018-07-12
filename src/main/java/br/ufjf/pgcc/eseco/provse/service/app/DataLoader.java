@@ -40,8 +40,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Classe responsável pelo tratamento das informações recebidas via serviço ou via banco de dados para incluí-las na
- * ontologia
+ * Classe responsável pelo tratamento das informações recebidas via serviço ou
+ * via banco de dados para incluí-las na ontologia
  *
  * @author Lenita
  */
@@ -60,8 +60,8 @@ public class DataLoader {
     }
 
     /**
-     * Classe para a inclusão de Triplas RDF na ontologia. Permite a inclusão de novos indivíduos, propriedades ou
-     * relacionamentos.
+     * Classe para a inclusão de Triplas RDF na ontologia. Permite a inclusão de
+     * novos indivíduos, propriedades ou relacionamentos.
      *
      * @param subject
      * @param predicate
@@ -311,15 +311,16 @@ public class DataLoader {
                                 String name = asJsonObject.get("name").getAsString();
                                 l = ontModel.createTypedLiteral(asJsonObject.get("description").getAsString());
                                 name = name.replaceAll(" ", "_").toLowerCase();
-                                name = name.replaceAll("[^\\p{ASCII}]", "");
-                                name = name.length() > 20 ? name.substring(0, 19) : name;
-                                System.out.println(name);
+                                name = name.replaceAll("\\(", "").toLowerCase();
+                                name = name.replaceAll("\\)", "").toLowerCase();
+                                name = name.replaceAll(",", "");
                                 if (!newDatatypeProperties.containsKey(name)) {
-//                                    DatatypeProperty createDatatypeProperty = ontModel.createDatatypeProperty(name);
-//                                    createDatatypeProperty.setSuperProperty(parent);
-//                                    newDatatypeProperties.put(name, createDatatypeProperty);
+                                    DatatypeProperty createDatatypeProperty = ontModel.createDatatypeProperty(OntologyController.URI + name);
+                                    createDatatypeProperty.setSuperProperty(parent);
+                                    System.out.println(createDatatypeProperty.getURI());
+                                    newDatatypeProperties.put(name, createDatatypeProperty);
                                 }
-//                                individual.addProperty(newDatatypeProperties.get(name), l);
+                                individual.addProperty(newDatatypeProperties.get(name), l);
                             }
                         }
                         continue;

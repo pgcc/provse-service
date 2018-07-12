@@ -217,13 +217,14 @@ public class InferenceLayer {
             for (Statement s : resource.listProperties().toList()) {
                 try {
                     String predicate = s.getPredicate().getLocalName();
-                    if (predicate.equals("differentFrom") || predicate.equals("type") || predicate.equals("sameAs")) {
+                    if (predicate.equals("detail") || predicate.equals("differentFrom") || predicate.equals("type") || predicate.equals("sameAs")) {
                         continue;
                     }
-
+                    predicate = predicate.replaceAll("([a-z])([A-Z]+)", "$1 $2");
                     name = "";
                     if (!s.getObject().isResource()) {
                         name = s.getObject().asLiteral().getValue().toString();
+                        predicate = predicate.replace("_", " ");
                         jsonDataProperties.addProperty(predicate, name);
                         continue;
                     }
