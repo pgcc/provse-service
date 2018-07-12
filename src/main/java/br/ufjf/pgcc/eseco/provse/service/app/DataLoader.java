@@ -40,8 +40,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Classe responsável pelo tratamento das informações recebidas via serviço ou
- * via banco de dados para incluí-las na ontologia
+ * Classe responsável pelo tratamento das informações recebidas via serviço ou via banco de dados para incluí-las na
+ * ontologia
  *
  * @author Lenita
  */
@@ -50,6 +50,7 @@ public class DataLoader {
     private final OntologyController controller;
 
     private static Map<String, DatatypeProperty> datatypeProperties;
+    private static Map<String, DatatypeProperty> newDatatypeProperties;
     private static Map<String, ObjectProperty> objectProperties;
     private static Map<String, OntClass> ontClasses;
     private static OntModel ontModel;
@@ -59,8 +60,8 @@ public class DataLoader {
     }
 
     /**
-     * Classe para a inclusão de Triplas RDF na ontologia. Permite a inclusão de
-     * novos indivíduos, propriedades ou relacionamentos.
+     * Classe para a inclusão de Triplas RDF na ontologia. Permite a inclusão de novos indivíduos, propriedades ou
+     * relacionamentos.
      *
      * @param subject
      * @param predicate
@@ -91,6 +92,7 @@ public class DataLoader {
         System.out.println("Preparing ontologies.");
 
         datatypeProperties = new HashMap<>();
+        newDatatypeProperties = new HashMap<>();
         objectProperties = new HashMap<>();
         ontClasses = new HashMap<>();
 
@@ -300,8 +302,25 @@ public class DataLoader {
                     } else if (value.isJsonArray()) {
                         JsonArray asJsonArray = value.getAsJsonArray();
                         for (JsonElement jsonElement : asJsonArray) {
-                            l = ontModel.createTypedLiteral(jsonElement.getAsString());
-                            individual.addProperty(datatypeProperties.get(key.toLowerCase()), l);
+                            if (jsonElement.isJsonPrimitive()) {
+                                l = ontModel.createTypedLiteral(jsonElement.getAsString());
+                                individual.addProperty(datatypeProperties.get(key.toLowerCase()), l);
+                            } else {
+                                DatatypeProperty parent = datatypeProperties.get(key.toLowerCase());
+                                JsonObject asJsonObject = jsonElement.getAsJsonObject();
+                                String name = asJsonObject.get("name").getAsString();
+                                l = ontModel.createTypedLiteral(asJsonObject.get("description").getAsString());
+                                name = name.replaceAll(" ", "_").toLowerCase();
+                                name = name.replaceAll("[^\\p{ASCII}]", "");
+                                name = name.length() > 20 ? name.substring(0, 19) : name;
+                                System.out.println(name);
+                                if (!newDatatypeProperties.containsKey(name)) {
+//                                    DatatypeProperty createDatatypeProperty = ontModel.createDatatypeProperty(name);
+//                                    createDatatypeProperty.setSuperProperty(parent);
+//                                    newDatatypeProperties.put(name, createDatatypeProperty);
+                                }
+//                                individual.addProperty(newDatatypeProperties.get(name), l);
+                            }
                         }
                         continue;
                     } else {
