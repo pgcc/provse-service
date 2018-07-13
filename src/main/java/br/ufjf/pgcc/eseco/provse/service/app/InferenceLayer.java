@@ -9,6 +9,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.hp.hpl.jena.ontology.DatatypeProperty;
 import com.hp.hpl.jena.ontology.Individual;
+import com.hp.hpl.jena.ontology.ObjectProperty;
 import com.hp.hpl.jena.ontology.OntClass;
 import com.hp.hpl.jena.ontology.OntProperty;
 import com.hp.hpl.jena.query.Query;
@@ -183,6 +184,7 @@ public class InferenceLayer {
     }
 
     public JsonObject jenaGetInferredDataByIndividual(String individualName) {
+
         DatatypeProperty dpName = controller.getOntModel().getDatatypeProperty(OntologyController.URI + "name");
         individualName = individualName.replace("activity.", "program.");
         JsonObject jsonProperties = new JsonObject();
@@ -214,12 +216,21 @@ public class InferenceLayer {
                 }
             });
 
-            for (Statement s : resource.listProperties().toList()) {
+            for (final Statement s : resource.listProperties().toList()) {
                 try {
                     String predicate = s.getPredicate().getLocalName();
                     if (predicate.equals("detail") || predicate.equals("differentFrom") || predicate.equals("type") || predicate.equals("sameAs")) {
                         continue;
                     }
+
+                    if (predicate.equals("wasReusedBy")) {
+
+                        ObjectProperty wasAssociatedWith = controller.getOntModel().getObjectProperty(OntologyController.URI + "wasAssociatedWith");
+                        StmtIterator listWasAssociatedWith = resource.listProperties(wasAssociatedWith);
+
+                        //s.getResource().getLocalName()
+                    }
+                    
                     predicate = predicate.replaceAll("([a-z])([A-Z]+)", "$1 $2");
                     name = "";
                     if (!s.getObject().isResource()) {
