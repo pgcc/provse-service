@@ -799,6 +799,21 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#a">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#b">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#d">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#ida">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idb">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
@@ -808,14 +823,141 @@
     <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#d">
+    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idx">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idy">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#w">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
     <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#z">
         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
     </rdf:Description>
-    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#w">
-        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"></rdfs:comment>
+        <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">S5</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="http://purl.dataone.org/provone/2015/01/15/ontology#Execution"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#a"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                <swrl:classPredicate rdf:resource="http://purl.dataone.org/provone/2015/01/15/ontology#Execution"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#b"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                                        <swrl:classPredicate rdf:resource="http://purl.dataone.org/provone/2015/01/15/ontology#Document"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#d"/>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.w3.org/ns/prov#influenced"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#d"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#a"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                                                        <swrl:propertyPredicate rdf:resource="http://www.w3.org/ns/prov#wasGeneratedBy"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#d"/>
+                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#b"/>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#id"/>
+                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#a"/>
+                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#ida"/>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                <rdf:first>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#id"/>
+                                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#b"/>
+                                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idb"/>
+                                                                    </rdf:Description>
+                                                                </rdf:first>
+                                                                <rdf:rest>
+                                                                    <rdf:Description>
+                                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                                        <rdf:first>
+                                                                            <rdf:Description>
+                                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                                                <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#notEqual"/>
+                                                                                <swrl:arguments rdf:parseType="Collection">
+                                                                                    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#ida"/>
+                                                                                    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idb"/>
+                                                                                </swrl:arguments>
+                                                                            </rdf:Description>
+                                                                        </rdf:first>
+                                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                                    </rdf:Description>
+                                                                </rdf:rest>
+                                                            </rdf:Description>
+                                                        </rdf:rest>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#wasReusedBy"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#d"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#a"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
     </rdf:Description>
     <rdf:Description>
         <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
@@ -849,12 +991,41 @@
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                                 <rdf:first>
                                     <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#id"/>
                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idx"/>
                                     </rdf:Description>
                                 </rdf:first>
-                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#id"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idy"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#notEqual"/>
+                                                        <swrl:arguments rdf:parseType="Collection">
+                                                            <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idx"/>
+                                                            <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idy"/>
+                                                        </swrl:arguments>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
                             </rdf:Description>
                         </rdf:rest>
                     </rdf:Description>
@@ -887,9 +1058,9 @@
                 <rdf:first>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.w3.org/ns/prov#used"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#hasMember"/>
                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#d"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#w"/>
                     </rdf:Description>
                 </rdf:first>
                 <rdf:rest>
@@ -898,8 +1069,8 @@
                         <rdf:first>
                             <rdf:Description>
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                <swrl:propertyPredicate rdf:resource="http://purl.dataone.org/provone/2015/01/15/ontology#wasPartOf"/>
-                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
+                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#hasMember"/>
+                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
                                 <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#z"/>
                             </rdf:Description>
                         </rdf:first>
@@ -909,49 +1080,12 @@
                                 <rdf:first>
                                     <rdf:Description>
                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                        <swrl:propertyPredicate rdf:resource="http://www.w3.org/ns/prov#generated"/>
-                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#d"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#isSimilar"/>
+                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#w"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#z"/>
                                     </rdf:Description>
                                 </rdf:first>
-                                <rdf:rest>
-                                    <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                        <rdf:first>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                                                <swrl:propertyPredicate rdf:resource="http://purl.dataone.org/provone/2015/01/15/ontology#wasPartOf"/>
-                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#w"/>
-                                            </rdf:Description>
-                                        </rdf:first>
-                                        <rdf:rest>
-                                            <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                <rdf:first>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
-                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#z"/>
-                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#w"/>
-                                                    </rdf:Description>
-                                                </rdf:first>
-                                                <rdf:rest>
-                                                    <rdf:Description>
-                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
-                                                        <rdf:first>
-                                                            <rdf:Description>
-                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
-                                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
-                                                            </rdf:Description>
-                                                        </rdf:first>
-                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
-                                                    </rdf:Description>
-                                                </rdf:rest>
-                                            </rdf:Description>
-                                        </rdf:rest>
-                                    </rdf:Description>
-                                </rdf:rest>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
                             </rdf:Description>
                         </rdf:rest>
                     </rdf:Description>
@@ -964,9 +1098,9 @@
                 <rdf:first>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#IndividualPropertyAtom"/>
-                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#wasReusedBy"/>
-                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#d"/>
-                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
+                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#isSimilar"/>
+                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
+                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
                     </rdf:Description>
                 </rdf:first>
                 <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
@@ -1016,12 +1150,41 @@
                                         <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                                         <rdf:first>
                                             <rdf:Description>
-                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#id"/>
                                                 <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idx"/>
                                             </rdf:Description>
                                         </rdf:first>
-                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#id"/>
+                                                        <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
+                                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idy"/>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                        <rdf:first>
+                                                            <rdf:Description>
+                                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                                <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#notEqual"/>
+                                                                <swrl:arguments rdf:parseType="Collection">
+                                                                    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idx"/>
+                                                                    <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idy"/>
+                                                                </swrl:arguments>
+                                                            </rdf:Description>
+                                                        </rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </rdf:rest>
                                     </rdf:Description>
                                 </rdf:rest>
                             </rdf:Description>
@@ -1077,12 +1240,41 @@
                                 <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
                                 <rdf:first>
                                     <rdf:Description>
-                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DifferentIndividualsAtom"/>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                        <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#id"/>
                                         <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#x"/>
-                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
+                                        <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idx"/>
                                     </rdf:Description>
                                 </rdf:first>
-                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                <rdf:rest>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                        <rdf:first>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                                <swrl:propertyPredicate rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#id"/>
+                                                <swrl:argument1 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#y"/>
+                                                <swrl:argument2 rdf:resource="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idy"/>
+                                            </rdf:Description>
+                                        </rdf:first>
+                                        <rdf:rest>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                                <rdf:first>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#notEqual"/>
+                                                        <swrl:arguments rdf:parseType="Collection">
+                                                            <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idx"/>
+                                                            <rdf:Description rdf:about="http://www.semanticweb.org/lenita/ontologies/2016/10/prov-se-o#idy"/>
+                                                        </swrl:arguments>
+                                                    </rdf:Description>
+                                                </rdf:first>
+                                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                            </rdf:Description>
+                                        </rdf:rest>
+                                    </rdf:Description>
+                                </rdf:rest>
                             </rdf:Description>
                         </rdf:rest>
                     </rdf:Description>
@@ -1108,5 +1300,5 @@
 
 
 
-<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi -->
 
