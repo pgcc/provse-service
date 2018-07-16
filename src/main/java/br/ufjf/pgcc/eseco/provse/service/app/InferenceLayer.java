@@ -209,28 +209,34 @@ public class InferenceLayer {
             String type = name.split("\\.")[0];
             jsonDataProperties.addProperty("type", type);
 
-            resource.listProperties().filterDrop(new Filter<Statement>() {
+            ExtendedIterator<Statement> filterProperties = resource.listProperties().filterDrop(new Filter<Statement>() {
                 @Override
                 public boolean accept(Statement t) {
-                    return t.getPredicate().getLocalName().equals("differentFrom") || controller.getOntModel().contains(t);
+                    String predicate = t.getPredicate().getLocalName();
+                    return predicate.equals("differentFrom") || predicate.equals("type")
+                            || predicate.equals("sameAs") || predicate.equals("detail") || controller.getOntModel().contains(t);
                 }
             });
 
-            for (final Statement s : resource.listProperties().toList()) {
+            for (final Statement s : filterProperties.toList()) {
                 try {
                     String predicate = s.getPredicate().getLocalName();
-                    if (predicate.equals("detail") || predicate.equals("differentFrom") || predicate.equals("type") || predicate.equals("sameAs")) {
-                        continue;
-                    }
 
                     if (predicate.equals("wasReusedBy")) {
 
-                        ObjectProperty wasAssociatedWith = controller.getOntModel().getObjectProperty(OntologyController.URI + "wasAssociatedWith");
-                        StmtIterator listWasAssociatedWith = resource.listProperties(wasAssociatedWith);
-
-                        //s.getResource().getLocalName()
+                        ObjectProperty wasAssociatedWith = controller.getOntModel().getObjectProperty(OntologyController.PROV_URI + "wasAssociatedWith");
+                        ObjectProperty wasGeneratedBy = controller.getOntModel().getObjectProperty(OntologyController.PROV_URI + "wasGeneratedBy");
+                        ExtendedIterator<Statement> filterDrop = resource.listProperties(wasAssociatedWith).andThen(resource.listProperties(wasGeneratedBy)).filterDrop(new Filter<Statement>() {
+                            @Override
+                            public boolean accept(Statement t) {
+                                return !t.getResource().getLocalName().equals(s.getResource().getLocalName());
+                            }
+                        });
+                        if (filterDrop.hasNext()) {
+                            continue;
+                        }
                     }
-                    
+
                     predicate = predicate.replaceAll("([a-z])([A-Z]+)", "$1 $2");
                     name = "";
                     if (!s.getObject().isResource()) {
@@ -313,6 +319,10 @@ public class InferenceLayer {
 
     public List<String> jenaGetWasInfluencedByInf(String individualName) {
         return jenaGetOPAssertionsByIndividualInf(individualName, "prov", "wasInfluencedBy");
+    }
+
+    public List<String> jenaGetWasGeneratedByInf(String individualName) {
+        return jenaGetOPAssertionsByIndividualInf(individualName, "prov", "wasGeneratedBy");
     }
 
     /**
