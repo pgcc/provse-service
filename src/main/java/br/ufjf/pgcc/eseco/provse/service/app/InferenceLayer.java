@@ -214,7 +214,7 @@ public class InferenceLayer {
                 public boolean accept(Statement t) {
                     String predicate = t.getPredicate().getLocalName();
                     return predicate.equals("differentFrom") || predicate.equals("type")
-                            || predicate.equals("sameAs") || predicate.equals("detail") || controller.getOntModel().contains(t);
+                            || predicate.equals("sameAs") || predicate.equals("detail") ;
                 }
             });
 
